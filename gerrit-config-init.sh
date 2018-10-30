@@ -20,7 +20,7 @@ update_plugins() {
             target="${2}/${key}"
             echo "Downloading ${value} to ${target}"
             mkdir -p $(dirname $target)
-            ${CURL_CMD} $value >$target
+            ${CURL_CMD} --fail -o $target $value
         fi
     done < $1
 }
