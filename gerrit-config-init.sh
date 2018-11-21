@@ -7,7 +7,8 @@ update_gitconfig() {
         if [ "${DROP_TOKEN}" = "${value}" ]; then
             git config --file $2 --unset-all $key || true
         else
-            git config --file $2 $key "$value"
+            [ $(grep $key $1 | wc -l) == 1 ] && { add=""; true; } || add="--add"
+            git config --file $2 $add $key "$value"
         fi
     done < $1
 }
